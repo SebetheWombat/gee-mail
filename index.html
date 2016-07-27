@@ -6,13 +6,45 @@
       window.onload = function(){
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
         // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
-        
+        var msgNum = 0;
+
+		for (var i in window.geemails){
+			var title = window.geemails[i].date + " " + window.geemails[i].subject + " " + window.geemails[i].sender;
+			var t = document.createElement('div');
+			var msg = document.createElement('div');
+			t.innerHTML = title;
+			t.id = i.toString();
+			msg.innerHTML = window.geemails[i].body;
+			msg.style.fontFamily = "Helvetica";
+			msg.style.backgroundColor = "#f1f1f1";
+			msg.style.color = "#111";
+			msg.id = "m" + i.toString();
+			msg.className = "hide";
+			document.getElementById('content').appendChild(t);
+			t.appendChild(msg);
+			msgNum++;
+			document.getElementById("inboxCount").innerHTML = "You have " + msgNum + " messages.";
+			t.addEventListener("click", function(){
+				var m = document.getElementById("m"+this.id.toString())
+				m.classList.toggle("hide");
+				if(this.classList.contains("read")){
+					document.getElementById("content").removeChild(this);
+					document.getElementById("read").appendChild(this);
+				}
+				this.classList.add("read");
+			});
+			
+		}
+		
       };
     </script>
 	</head>
 	<body>
 		<div class="container" id="main">
-			Build Me!
+			<header> <h1>Gee-Mail</h1> </header>
+			<div id="inboxCount"></div>
+			<div id="content"></div>
+			<div id = "read"></div>
 		</div>
 	</body>
 </html>
