@@ -7,20 +7,29 @@
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
         // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
         var msgNum = 0;
-
+		var content = document.getElementById("content");
 		for (var i in window.geemails){
-			var title = window.geemails[i].date + " " + window.geemails[i].subject + " " + window.geemails[i].sender;
+			displayMail(window.geemails[i].date,window.geemails[i].subject,window.geemails[i].sender,window.geemails[i].body,i);
+		}
+		
+		setInterval(function(){
+			var message = getNewMessage();
+			displayMail(message.date,message.subject,message.sender,message.body,msgNum);
+		}, 10000);
+		
+		function displayMail(date,sub,send,body,id){
+			var title = date + " " + sub + " " + send;
 			var t = document.createElement('div');
 			var msg = document.createElement('div');
 			t.innerHTML = title;
-			t.id = i.toString();
-			msg.innerHTML = window.geemails[i].body;
+			t.id = id.toString();
+			msg.innerHTML = body;
 			msg.style.fontFamily = "Helvetica";
 			msg.style.backgroundColor = "#f1f1f1";
 			msg.style.color = "#111";
-			msg.id = "m" + i.toString();
+			msg.id = "m" + id.toString();
 			msg.className = "hide";
-			document.getElementById('content').appendChild(t);
+			content.appendChild(t);
 			t.appendChild(msg);
 			msgNum++;
 			document.getElementById("inboxCount").innerHTML = "You have " + msgNum + " messages.";
@@ -28,14 +37,12 @@
 				var m = document.getElementById("m"+this.id.toString())
 				m.classList.toggle("hide");
 				if(this.classList.contains("read")){
-					document.getElementById("content").removeChild(this);
+					content.removeChild(this);
 					document.getElementById("read").appendChild(this);
 				}
 				this.classList.add("read");
 			});
-			
 		}
-		
       };
     </script>
 	</head>
