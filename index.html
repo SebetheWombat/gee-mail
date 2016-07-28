@@ -7,7 +7,14 @@
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
         // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
         var msgNum = 0;
+		var readNum = 0;
+		var unreadNum = 0;
 		var content = document.getElementById("content");
+		var readContent = document.getElementById("readContent");
+		var inbox = document.getElementById('all');
+		var unread = document.getElementById('unread');
+		var read = document.getElementById('read');
+		
 		for (var i in window.geemails){
 			displayMail(window.geemails[i].date,window.geemails[i].subject,window.geemails[i].sender,window.geemails[i].body,i);
 		}
@@ -18,40 +25,62 @@
 		}, 10000);
 		
 		function displayMail(date,sub,send,body,id){
-			var title = date + " " + sub + " " + send;
+			var d = date.toString().substr(0,21)
+			var title = d + " " + sub + " " + send;
 			var t = document.createElement('div');
 			var msg = document.createElement('div');
 			t.innerHTML = title;
 			t.id = id.toString();
 			msg.innerHTML = body;
-			msg.style.fontFamily = "Helvetica";
-			msg.style.backgroundColor = "#f1f1f1";
-			msg.style.color = "#111";
+			msg.className = "hide msg";
 			msg.id = "m" + id.toString();
-			msg.className = "hide";
 			content.appendChild(t);
 			t.appendChild(msg);
 			msgNum++;
-			document.getElementById("inboxCount").innerHTML = "You have " + msgNum + " messages.";
+			unreadNum = msgNum - readNum;
+			inbox.innerHTML = "All: " + msgNum;
+			unread.innerHTML = "New: " + unreadNum;
+			read.innerHTML = "Read: " + readNum;
 			t.addEventListener("click", function(){
 				var m = document.getElementById("m"+this.id.toString())
 				m.classList.toggle("hide");
 				if(this.classList.contains("read")){
 					content.removeChild(this);
-					document.getElementById("read").appendChild(this);
+					readContent.appendChild(this);
+					readNum++;
+					unreadNum = msgNum - readNum;
+					inbox.innerHTML = "All: " + msgNum;
+					unread.innerHTML = "New: " + unreadNum;
+					read.innerHTML = "Read: " + readNum;
 				}
 				this.classList.add("read");
 			});
 		}
+		read.addEventListener("click", function(){
+			content.classList.add("hide");
+			readContent.classList.remove("hide");
+		});
+		unread.addEventListener("click", function(){
+			content.classList.remove("hide");
+			readContent.classList.add("hide");
+		});
+		inbox.addEventListener("click", function(){
+			content.classList.remove("hide");
+			readContent.classList.remove("hide");
+		});
       };
     </script>
 	</head>
 	<body>
 		<div class="container" id="main">
-			<header> <h1>Gee-Mail</h1> </header>
-			<div id="inboxCount"></div>
+			<div class="header"> <h1>Gee-Mail</h1> </div>
+			<ul id="inboxCount">
+				<li id="all">All</li>
+				<li id="unread">New</li>
+				<li id="read">Read: 0</li>
+			</ul>
 			<div id="content"></div>
-			<div id = "read"></div>
+			<div id = "readContent"></div>
 		</div>
 	</body>
 </html>

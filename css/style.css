@@ -1,7 +1,45 @@
-.hide{
-	display: none;
+body{
+	font-family:arial,sans-serif;
+	font-weight:bold;
+	font-size:14px;
+}
+h1{
+	padding:20px 0 0 0;
+	margin:0 0 0 0;
+}
+.header{
+	background: #f1f1f1;
+	height:70px;	
+}
+.msg{
+	background: #f1f1f1;
+	color: #111;
+	font-size:16px;
+	font-weight:normal;
 }
 .read{
 	color: #999;
 	bottom: 0px;
+}
+.hide{
+	display: none;
+}
+#inboxCount{
+	height:100%;
+	background: #fef;
+	margin-top:0;
+	padding-left:0;
+	position:fixed;
+}
+#inboxCount li{
+	display:block;
+	padding:5px;
+	font-size:13px;
+	font-weight:bold;
+	cursor:pointer;
+}
+#content, #readContent{
+	line-height:1.6;
+	cursor:pointer;
+	margin-left:75px;
 }
