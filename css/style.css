@@ -4,23 +4,29 @@ body{
 	font-size:14px;
 	background:#fcfcff;
 	line-height:1.6;
+	margin:0;
+	padding:0;
+	color: #510;
 }
 h1,p{
-	padding:15px;
-	margin:0 0 0 0;
+	padding:10px;
+	margin:0;
 }
-.header{
+
+header{
 	background: #aef;
-	height:70px;
+	height:80px;
 	margin-top:0;
-	color:#dd4400
+	font-size:18px;
+	font-family:"arial black",sans-serif;
 }
 .msg{
 	background: #eef0ff;
-	color: #111;
+	color: #200;
 	font-size:16px;
 	font-weight:normal;
 	clear:both;
+	font-family:georgia,serif;
 }
 .read{
 	color: #999;
@@ -32,7 +38,7 @@ h1,p{
 .title{
 	border-bottom:1px dashed #666;
 	width:100%;
-
+	min-width:500px;
 }
 .right{
 	float:right;
@@ -43,7 +49,6 @@ h1,p{
 .center{
 	width:50%;
 	margin:0 auto;
-	
 }
 #inboxCount{
 	width:100px;
@@ -67,7 +72,6 @@ h1,p{
 	margin-top:15px;
 	cursor:pointer;
 	margin-left:125px;
-	
 }
 .title:hover{
 	box-shadow:0 1px 1px black;

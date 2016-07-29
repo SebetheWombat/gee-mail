@@ -2,6 +2,7 @@
 	<head>
 		<script src="js/mail-generator.js"></script>
 		<link href="css/style.css" rel="stylesheet" media="screen">
+		<title>GeeMail | Inbox</title>
     <script>
       window.onload = function(){
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
@@ -15,16 +16,20 @@
 		var unread = document.getElementById('unread');
 		var read = document.getElementById('read');
 		
+		//Loop through window.geemails array sending object data to displayMail function
 		for (var i in window.geemails){
 			displayMail(window.geemails[i].date,window.geemails[i].subject,window.geemails[i].sender,window.geemails[i].body,i);
 		}
 		
+		//Create a new message object every 10sec and send info to displayMail function
 		setInterval(function(){
 			var message = getNewMessage();
 			displayMail(message.date,message.subject,message.sender,message.body,msgNum);
 		}, 10000);
 		
+		//Parses info from object to display in inbox
 		function displayMail(date,sub,send,body,id){
+			//Create html objects to store info
 			var d = date.toString().substr(0,21)
 			var t = document.createElement('div');
 			var right = document.createElement('p');
@@ -32,6 +37,7 @@
 			var center = document.createElement('p');
 			var msg = document.createElement('div');
 			
+			//Add class to new elements for styling
 			right.className = "right";
 			right.innerHTML = d;
 			left.className = "left";
@@ -44,18 +50,22 @@
 			msg.className = "hide msg";
 			msg.id = "m" + id.toString();
 			
+			//Add HTML elements containing message info to page
 			content.appendChild(t);
 			t.appendChild(left);
 			t.appendChild(right);
 			t.appendChild(center);
 			t.appendChild(msg);
 			
+			//Track number of elements: total, read, and unread messages
 			msgNum++;
 			unreadNum = msgNum - readNum;
 			inbox.innerHTML = "Inbox: " + msgNum;
 			unread.innerHTML = "New: " + unreadNum;
 			read.innerHTML = "Read: " + readNum;
 			
+			//When div containing subject of message is clicked on message is either displayed or hidden depending on current state by toggling class.
+			//Message counts are updated and read messages are grayed out and moved to bottom
 			t.addEventListener("click", function(){
 				var m = document.getElementById("m"+this.id.toString())
 				m.classList.toggle("hide");
@@ -71,6 +81,8 @@
 				this.classList.add("read");
 			});
 		}
+		
+		//Filters inbox based whether or not the message has been read
 		read.addEventListener("click", function(){
 			content.classList.add("hide");
 			readContent.classList.remove("hide");
@@ -87,7 +99,7 @@
     </script>
 	</head>
 	<body>
-		<div class="header"> <h1>Gee-Mail</h1> </div>
+		<header> <h1>GeeMail</h1> </header>
 		<div class="container" id="main">
 			<ul id="inboxCount">
 				<li id="all">Inbox: </li>
