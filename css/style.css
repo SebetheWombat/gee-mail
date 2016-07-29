@@ -2,20 +2,25 @@ body{
 	font-family:arial,sans-serif;
 	font-weight:bold;
 	font-size:14px;
+	background:#fcfcff;
+	line-height:1.6;
 }
-h1{
-	padding:20px 0 0 0;
+h1,p{
+	padding:15px;
 	margin:0 0 0 0;
 }
 .header{
-	background: #f1f1f1;
-	height:70px;	
+	background: #aef;
+	height:70px;
+	margin-top:0;
+	color:#dd4400
 }
 .msg{
-	background: #f1f1f1;
+	background: #eef0ff;
 	color: #111;
 	font-size:16px;
 	font-weight:normal;
+	clear:both;
 }
 .read{
 	color: #999;
@@ -24,12 +29,29 @@ h1{
 .hide{
 	display: none;
 }
+.title{
+	border-bottom:1px dashed #666;
+	width:100%;
+
+}
+.right{
+	float:right;
+}
+.left{
+	float:left;
+}
+.center{
+	width:50%;
+	margin:0 auto;
+	
+}
 #inboxCount{
-	height:100%;
-	background: #fef;
-	margin-top:0;
+	width:100px;
+	margin-top:20px;
 	padding-left:0;
 	position:fixed;
+	border-bottom: 1px dashed #999;
+	border-top: 1px dashed #999;
 }
 #inboxCount li{
 	display:block;
@@ -38,8 +60,15 @@ h1{
 	font-weight:bold;
 	cursor:pointer;
 }
+#inboxCount li:hover{
+	box-shadow:2px 2px 5px black;
+}
 #content, #readContent{
-	line-height:1.6;
+	margin-top:15px;
 	cursor:pointer;
-	margin-left:75px;
+	margin-left:125px;
+	
+}
+.title:hover{
+	box-shadow:0 1px 1px black;
 }
